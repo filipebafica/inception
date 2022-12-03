@@ -1,0 +1,13 @@
+version: '3.9'
+
+networks:
+  inception_network:
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      image: nginx
+      contex: ./requirements/nginx
+      dockerfile: Dockerfile
+      network: inception_network
