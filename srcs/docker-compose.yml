@@ -6,8 +6,9 @@ networks:
 services:
   nginx:
     container_name: nginx
+    image: nginx
     build:
-      image: nginx
-      contex: ./requirements/nginx
+      context: ./requirements/nginx
       dockerfile: Dockerfile
-      network: inception_network
+    networks:
+      - inception_network
