@@ -1,13 +1,13 @@
 DOCKER_COMPOSE_PATH = ./srcs/docker-compose.yml
 
 build:
-	docker compose -f $(DOCKER_COMPOSE_PATH) build
+	@docker compose -f $(DOCKER_COMPOSE_PATH) build
 
 up:
-	docker compose -f $(DOCKER_COMPOSE_PATH) up -d
+	@docker compose -f $(DOCKER_COMPOSE_PATH) up -d
 
 down:
-	docker compose -f $(DOCKER_COMPOSE_PATH) down
+	@docker compose -f $(DOCKER_COMPOSE_PATH) down
 
 clean: SHELL := /bin/bash
 clean:
