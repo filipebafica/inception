@@ -8,19 +8,19 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositor
 
 
 # Install dependecies
-RUN apk update && apk upgrade && apk add php7 php7-fpm bash
+RUN apk update && apk upgrade && apk add php8 php8-fpm php8-mysqli bash
 
 
 # Change fpm port
-RUN echo listen = 0.0.0.0:9000 >> /etc/php7/php-fpm.d/www.conf
+RUN echo listen = 0.0.0.0:9000 >> /etc/php8/php-fpm.d/www.conf
 
 
 # Download and extract WordPress
-RUN mkdir -p /var/www/html
-RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
-RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1
-RUN rm /tmp/wordpress.tar.gz
+# RUN mkdir -p /var/www/html
+# RUN wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
+# RUN tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1
+# RUN rm /tmp/wordpress.tar.gz
 
 EXPOSE 9000
 
-CMD [ "php-fpm7", "-F", "-R" ]
+CMD [ "php-fpm8", "-F", "-R" ]
