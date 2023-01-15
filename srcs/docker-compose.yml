@@ -3,6 +3,9 @@ version: '3.9'
 networks:
   inception_network:
 
+volumes:
+  shared-volume:
+
 services:
   mariadb:
     container_name: mariadb
@@ -31,7 +34,7 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
-      - ./requirements/wordpress/html:/var/www/html
+      - shared-volume:/var/www/html
     networks:
       - inception_network
 
@@ -46,7 +49,7 @@ services:
     ports:
       - "443:80"
     volumes:
-      - ./requirements/wordpress/html:/var/www/html
+      - shared-volume:/var/www/html
       - ./requirements/nginx/nginx-conf:/etc/nginx/http.d
     networks:
       - inception_network
