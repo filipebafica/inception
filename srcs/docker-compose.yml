@@ -16,7 +16,7 @@ services:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     environment:
-      - MYSQL_DATABASE=wordpress
+      MYSQL_DATABASE: wordpress
     networks:
       - inception_network
 
@@ -26,15 +26,14 @@ services:
     env_file:
       - .env
     environment:
-    - WORDPRESS_DB_HOST=db:3306
-    - WORDPRESS_DB_USER=$MYSQL_USER
-    - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-    - WORDPRESS_DB_NAME=wordpress
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_NAME: wordpress
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
       - shared-volume:/var/www/html
+      - ./requirements/wordpress/wordpress-conf/wp-config.php:/var/www/html/wp-config.php
     networks:
       - inception_network
 
