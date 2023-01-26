@@ -26,7 +26,7 @@ define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
 define( 'DB_USER', getenv('MYSQL_USER') );
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD') );
+define( 'DB_PASSWORD', getenv('MYSQL_ROOT_PASSWORD') );
 
 /** Database hostname */
 define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
@@ -79,7 +79,7 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 

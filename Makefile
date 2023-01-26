@@ -18,3 +18,9 @@ clean:
 	docker rmi mariadb_42_inception
 	docker rmi wordpress_42_inception
 	docker rmi nginx_42_inception
+
+mariadb:
+	docker exec -it mariadb sh
+
+wordpress:
+	docker exec -it wordpress sh
