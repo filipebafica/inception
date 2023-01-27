@@ -34,6 +34,8 @@ services:
       - ./requirements/wordpress/wordpress-conf/wp-config.php:/var/www/html/wp-config.php
     networks:
       - inception_network
+    depends_on:
+      - mariadb
 
   nginx:
     depends_on:
