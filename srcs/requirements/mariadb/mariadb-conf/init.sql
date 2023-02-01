@@ -1,2 +1,0 @@
-CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES ON *.* to 'fbafica'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
