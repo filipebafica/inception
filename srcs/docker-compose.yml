@@ -10,13 +10,17 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb_42_inception
-    env_file:
-      - .env
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
+      args:
+        - MYSQL_DATABASE
+        - MYSQL_ROOT
+        - MYSQL_ROOT_PASSWORD
+        - MYSQL_USER
+        - MYSQL_PASSWORD
     volumes:
-      - ./requirements/mariadb/tools/entrypoint.sh:/entrypoint/entrypoint.sh
+      - ./requirements/mariadb/tools:/tools
     networks:
       - inception_network
 

@@ -20,7 +20,7 @@ clean:
 	docker rmi nginx_42_inception
 
 mariadb:
-	docker exec -it mariadb sh
+	docker exec -it mariadb bash
 
 wordpress:
 	docker exec -it wordpress sh
