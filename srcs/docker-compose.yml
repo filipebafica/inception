@@ -4,12 +4,19 @@ networks:
   inception_network:
 
 volumes:
-  shared-volume:
+  shared-volume-mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/fabfica/data
+      device: /home/fbafica/data/mariadb
+  
+  shared-volume-wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fbafica/data/wordpress
 
 services:
   mariadb:
@@ -25,7 +32,7 @@ services:
         - MYSQL_USER
         - MYSQL_PASSWORD
     volumes:
-      - shared-volume/mariadb:/var/www/html
+      - shared-volume-mariadb:/var/lib/mysql
       - ./requirements/mariadb/tools:/tools
     networks:
       - inception_network
@@ -42,7 +49,7 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     volumes:
-      - shared-volume/wordpress:/var/www/html
+      - shared-volume-wordpress:/var/www/html
       - ./requirements/wordpress/tools/entrypoint.sh:/home/entrypoint/entrypoint.sh
     networks:
       - inception_network
@@ -59,7 +66,7 @@ services:
     ports:
       - "443:80"
     volumes:
-      - shared-volume/wordpress:/var/www/html
+      - shared-volume-wordpress:/var/www/html
       - ./requirements/nginx/nginx-conf:/etc/nginx/http.d
     networks:
       - inception_network
