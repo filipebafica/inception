@@ -2,6 +2,8 @@ FROM alpine:3.17.0
 
 RUN apk update && apk add nginx openssl bash
 
+RUN mkdir -p /etc/nginx/ssl/
+
 RUN openssl req \ 
             -x509 \
             -nodes \
@@ -9,7 +11,7 @@ RUN openssl req \
             -newkey rsa:2048 \
             -keyout /etc/nginx/ssl/nginx.key \
             -out /etc/nginx/ssl/nginx.crt \
-            -subj "/C=BR/ST=SP/L=City/O=42/CN=fbafica.42.fr"
+            -subj "/C=BR/ST=SP/O=42/CN=fbafica.42.fr"
 
 CMD ["nginx", "-g daemon off;"]
 
