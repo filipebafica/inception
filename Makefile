@@ -1,6 +1,7 @@
 DOCKER_COMPOSE_PATH = ./srcs/docker-compose.yml
 
 build:
+	@sudo echo "127.0.0.1 fbafica.42.fr" >> /etc/hosts
 	@docker-compose -f $(DOCKER_COMPOSE_PATH) build
 
 up:
@@ -9,15 +10,13 @@ up:
 down:
 	@docker-compose -f $(DOCKER_COMPOSE_PATH) down
 
-# clean: SHELL := /bin/bash
-# clean:
-# 	@if [[ $$(docker images -q | wc -l) != 0 ]]; then\
-# 		docker rmi $$(docker images -q);\
-# 	fi
 clean:
-	docker rmi mariadb_42_inception
-	docker rmi wordpress_42_inception
-	docker rmi nginx_42_inception
+	@sudo sed -i.bak '/127.0.0.1 fbafica.42.fr/d' /etc/hosts
+
+fclean: clean
+	@docker rmi mariadb_42_inception
+	@docker rmi wordpress_42_inception
+	@docker rmi nginx_42_inception
 
 mariadb:
 	docker exec -it mariadb bash
