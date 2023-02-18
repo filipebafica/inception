@@ -1,4 +1,7 @@
 DOCKER_COMPOSE_PATH = ./srcs/docker-compose.yml
+MARIA_DB_IMAGE = mariadb
+WORDPRESS_IMAGE = wordpress
+NGINX_IMAGE = nginx
 
 build:
 	@sudo mkdir -p /home/fbafica/data/mariadb
@@ -23,14 +26,14 @@ clean:
 
 fclean: SHELL := /bin/bash
 fclean: clean
-	@if [[ $$(docker images mariadb_42_inception | wc -l) > 1 ]]; then\
-		docker rmi mariadb_42_inception;\
+	@if [[ $$(docker images $(MARIA_DB_IMAGE) | wc -l) > 1 ]]; then\
+		docker rmi $(MARIA_DB_IMAGE);\
 	fi
-	@if [[ $$(docker images wordpress_42_inception | wc -l) > 1 ]]; then\
-		docker rmi wordpress_42_inception;\
+	@if [[ $$(docker images $(WORDPRESS_IMAGE) | wc -l) > 1 ]]; then\
+		docker rmi $(WORDPRESS_IMAGE);\
 	fi
-	@if [[ $$(docker images nginx_42_inception | wc -l) > 1 ]]; then\
-		docker rmi nginx_42_inception;\
+	@if [[ $$(docker images $(NGINX_IMAGE) | wc -l) > 1 ]]; then\
+		docker rmi $(NGINX_IMAGE);\
 	fi
 
 mariadb:
