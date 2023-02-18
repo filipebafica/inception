@@ -12,16 +12,25 @@ up:
 down:
 	@docker-compose -f $(DOCKER_COMPOSE_PATH) down
 
+clean: SHELL := /bin/bash
 clean:
+	@if [[ $$(docker volume ls -q | wc -l) != 0 ]]; then\
+		docker volume rm $(docker volume ls -q);\
+	fi
 	@sudo rm -rf /home/fbafica/
-	@docker volume rm srcs_shared-volume-wordpress
-	@docker volume rm srcs_shared-volume-mariadb
 	@sudo sed -i.bak '/127.0.0.1 fbafica.42.fr/d' /etc/hosts
 
+fclean: SHELL := /bin/bash
 fclean: clean
-	@docker rmi mariadb_42_inception
-	@docker rmi wordpress_42_inception
-	@docker rmi nginx_42_inception
+	@if [[ $$(docker images mariadb_42_inception | wc -l) > 1 ]]; then\
+		@docker rmi mariadb_42_inception;\
+	fi
+	@if [[ $$(docker images wordpress_42_inception | wc -l) > 1 ]]; then\
+		@docker rmi wordpress_42_inception;\
+	fi
+	@if [[ $$(docker images nginx_42_inception | wc -l) > 1 ]]; then\
+		@docker rmi nginx_42_inception;\
+	fi
 
 mariadb:
 	docker exec -it mariadb bash
