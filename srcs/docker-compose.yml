@@ -21,7 +21,7 @@ volumes:
 services:
   mariadb:
     container_name: mariadb
-    image: mariadb_42_inception
+    image: mariadb
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
@@ -43,7 +43,7 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-    image: wordpress_42_inception
+    image: wordpress
     env_file:
       - .env
     build:
@@ -61,7 +61,7 @@ services:
     depends_on:
       - wordpress
     container_name: nginx
-    image: nginx_42_inception
+    image: nginx
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
