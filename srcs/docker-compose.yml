@@ -34,6 +34,7 @@ services:
     volumes:
       - shared-volume-mariadb:/var/lib/mysql
       - ./requirements/mariadb/tools:/tools
+    restart: always
     networks:
       - inception_network
 
@@ -51,6 +52,7 @@ services:
     volumes:
       - shared-volume-wordpress:/var/www/html
       - ./requirements/wordpress/tools/entrypoint.sh:/home/entrypoint/entrypoint.sh
+    restart: always
     networks:
       - inception_network
 
@@ -68,5 +70,6 @@ services:
     volumes:
       - shared-volume-wordpress:/var/www/html
       - ./requirements/nginx/nginx-conf:/etc/nginx/http.d
+    restart: always
     networks:
       - inception_network
